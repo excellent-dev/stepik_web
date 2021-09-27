@@ -17,14 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from qa.urls import *
 from qa.views import test ###only for now
-
+re_path(r'^login\/.*$', views.test)
 urlpatterns = [
-    url(r'^admin/', admin.site.urls, name='admin'),
-    url(r'^login/', test, name='login'),
-    url(r'^signup/', test, name='signup'),
-    url(r'^question/', include('qa.urls')), ###good parctice as tree-structure
-    url(r'^ask/', test, name='ask'),
-    url(r'^popular/', test, name='popular'),
-    url(r'^new/', test, name='new'),
-	url(r'^$', test),
+    url(r'^$', include('qa.urls')),
+    url(r'^login/$', include('qa.urls')),
+    url(r'^signup/$', include('qa.urls')),
+    url(r'^question/\d+/$', include('qa.urls')),
+    url(r'^ask/$', include('qa.urls')),
+    url(r'^popular/$', include('qa.urls')),
+    url(r'^new/$', include('qa.urls')),
 ]
